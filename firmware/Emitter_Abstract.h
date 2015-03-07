@@ -14,7 +14,7 @@
 #ifndef emitter_abstract_h
 #define emitter_abstract_h
 
-#include "Arduino.h"
+//#include "Arduino.h"
 #include "Particle_Abstract.h"
 
 class Emitter_Abstract {

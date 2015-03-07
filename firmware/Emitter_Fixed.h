@@ -15,7 +15,7 @@
 #define emitter_fixed_h
 
 #include "Emitter_Abstract.h"
-#include "Arduino.h"
+//#include "Arduino.h"
 
 class Emitter_Fixed : public Emitter_Abstract {
 public:
