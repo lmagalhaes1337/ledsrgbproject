@@ -11,7 +11,7 @@
  * Emitter_Fire.cpp - emit particles to simulate fire
  */
  
- #include "leds-rgb-project.h"
+#include "leds-rgb-project.h"
 
 uint8_t Emitter_Fire::baseHue = 128; //blues
 uint8_t Emitter_Fire::maxTtl = 128;

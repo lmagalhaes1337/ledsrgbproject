@@ -10,6 +10,8 @@
 /*
  * Emitter_Fire.h - emit particles to simulate fire
  */
+#include "application.h"
+
  #ifndef PS_PIXELS_X
 #define PS_PIXELS_X 8
 #endif
