@@ -51,7 +51,7 @@ typedef struct {
     byte v;
 } ColorHSV;
 
-/*class Particle_Abstract {
+class Particle_Abstract {
 public:
     byte x;   //left
     byte y;   //bottom
@@ -62,9 +62,9 @@ public:
     boolean isAlive; //is alive?
 
     virtual void update(void);
-};*/
+};
 
-typedef struct {
+/*typedef struct {
 	byte x;   //left
     byte y;   //bottom
     signed char vx;  //horizontal velocity
@@ -72,7 +72,7 @@ typedef struct {
     byte ttl; //time to live
     byte hue; //hue
     boolean isAlive; //is alive?
-} Particle_Abstract;
+} Particle_Abstract;*/
 
 class Emitter_Abstract {
 public:
