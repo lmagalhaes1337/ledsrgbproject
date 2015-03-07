@@ -16,7 +16,6 @@
 
 #include "PsConstants.h"
 #include "Emitter_Abstract.h"
-#include "Arduino.h"
 
 class Emitter_Side : public Emitter_Abstract {
 public:

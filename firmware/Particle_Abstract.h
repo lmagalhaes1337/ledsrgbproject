@@ -15,7 +15,6 @@
 #define particle_abstract_h
 
 #include "PsConstants.h"
-#include "Arduino.h"
 
 class Particle_Abstract {
 public:

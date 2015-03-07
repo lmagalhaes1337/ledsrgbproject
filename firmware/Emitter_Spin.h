@@ -16,7 +16,6 @@
 #define emitter_spin_h
 
 #include "Emitter_Abstract.h"
-#include "Arduino.h"
 
 class Emitter_Spin : public Emitter_Abstract {
 public:
