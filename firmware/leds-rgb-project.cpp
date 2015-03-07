@@ -32,7 +32,7 @@ void Emitter_Fire::emit(Particle_Abstract *particle)
     if (cycleHue) baseHue = (counter>>2)%240;
 
     if (counter % 2 == 0) {
-        particle->x = random(PS_MAX_X >> 2, 3 * (PS_MAX_X >> 2));
+        particle->x = random((PS_MAX_X >> 2), 3 * (PS_MAX_X >> 2));
         switch (particle->x / 32) {
         case 0:
         case 7:
@@ -211,13 +211,13 @@ void Emitter_Spin::update()
 
     // Conver from Degree -> Rad
     if (counter%2 == 0) {
-        radAngle = -counter*tempRv*(PI/180) ;
+        radAngle = -counter*tempRv*(3.14/180) ;
     } else {
-        radAngle = 180-counter*tempRv*(PI/180) ;
+        radAngle = 180-counter*tempRv*(3.14/180) ;
     }
     // Convert Polar -> Cartesian
-    vx = (signed char)(r * cos(radAngle));
-    vy = (signed char)(r * sin(radAngle));
+    vx = (signed char)(r * 4)//cos(radAngle));
+    vy = (signed char)(r * 3)//sin(radAngle));
 }
 
 void Emitter_Spin::emit(Particle_Abstract * particle)
@@ -256,7 +256,7 @@ void Particle_Attractor::update(void)
 
     dx = (int)atx - x;
     dy = (int)aty - y;
-    mult = (float)atf/sqrt(dx*dx+dy*dy);
+    mult = (float)atf/(dx*dx+dy*dy);
     acx = (signed char)(mult*dx);
     acy = (signed char)(mult*dy);
 
@@ -471,7 +471,7 @@ void PartMatrix::HSVtoRGB(ColorRGB *colorRGB, ColorHSV *colorHSV)
     //if saturation > 0, more complex calculations are needed
     else {
         h *= 6.0; //to bring hue to a number between 0 and 6, better for the calculations
-        i = (int)(floor(h)); //e.g. 2.7 becomes 2 and 3.01 becomes 3 or 4.9999 becomes 4
+        i = (int)(h)); //e.g. 2.7 becomes 2 and 3.01 becomes 3 or 4.9999 becomes 4
         f = h - i;//the fractional part of h
 
         p = (float)(v * (1.0 - s));
