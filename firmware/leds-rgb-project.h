@@ -16,6 +16,7 @@
 
 #include "PsConstants.h"
 #include "Emitter_Abstract.h"
+#include "application.h"
 
 class Emitter_Fire : public Emitter_Abstract {
 public:
