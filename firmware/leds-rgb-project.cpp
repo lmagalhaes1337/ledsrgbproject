@@ -13,8 +13,8 @@
  
 #include "leds-rgb-project.h"
 
-uint8_t Emitter_Fire::baseHue = 128; //blues
-uint8_t Emitter_Fire::maxTtl = 128;
+byte Emitter_Fire::baseHue = 128; //blues
+byte Emitter_Fire::maxTtl = 128;
 
 Emitter_Fire::Emitter_Fire()
 {
@@ -84,7 +84,7 @@ void Emitter_Fire::emit(Particle_Abstract *particle)
     particle->isAlive = true;
 }
 
-Emitter_Fixed::Emitter_Fixed(uint8_t x, uint8_t y, signed char vx, signed char vy, uint8_t ttl)
+Emitter_Fixed::Emitter_Fixed(byte x, byte y, signed char vx, signed char vy, byte ttl)
 {
     counter = 0;
     this->x = x;
@@ -109,10 +109,10 @@ void Emitter_Fixed::emit(Particle_Abstract * particle)
     particle->isAlive = true;
 }
 
-uint8_t Emitter_Fountain::minLife = 50;
-uint8_t Emitter_Fountain::maxLife = 250;
+byte Emitter_Fountain::minLife = 50;
+byte Emitter_Fountain::maxLife = 250;
 
-Emitter_Fountain::Emitter_Fountain(signed char vx, signed char vy, uint8_t var, Particle_Abstract *source)
+Emitter_Fountain::Emitter_Fountain(signed char vx, signed char vy, byte var, Particle_Abstract *source)
 {
     this->vx = vx;
     this->vy = vy;
@@ -143,8 +143,8 @@ void Emitter_Fountain::emit(Particle_Abstract * particle)
     particle->isAlive = true;
 }
 
-uint8_t Emitter_Side::baseHue = 128; //blues
-uint8_t Emitter_Side::maxTtl = 128;
+byte Emitter_Side::baseHue = 128; //blues
+byte Emitter_Side::maxTtl = 128;
 
 Emitter_Side::Emitter_Side(char side)
 {
@@ -183,9 +183,9 @@ void Emitter_Side::emit(Particle_Abstract * particle)
     particle->isAlive = true;
 }
 
-uint8_t Emitter_Spin::maxTtl = 100;
+byte Emitter_Spin::maxTtl = 100;
 
-Emitter_Spin::Emitter_Spin(uint8_t x, uint8_t y, uint8_t r, signed char rv)
+Emitter_Spin::Emitter_Spin(byte x, byte y, byte r, signed char rv)
 {
     this->x = x;
     this->y = y;
@@ -234,8 +234,8 @@ void Emitter_Spin::emit(Particle_Abstract * particle)
 }
 
 
-uint8_t Particle_Attractor::atx = 112;
-uint8_t Particle_Attractor::aty = 112;
+byte Particle_Attractor::atx = 112;
+byte Particle_Attractor::aty = 112;
 signed char Particle_Attractor::atf = 4;
 
 Particle_Attractor::Particle_Attractor()
@@ -323,7 +323,7 @@ void Particle_Bounce::update(void)
     }
 }
 
-uint8_t Particle_Fixed::decayFactor = 10;
+byte Particle_Fixed::decayFactor = 10;
 
 Particle_Fixed::Particle_Fixed()
 {
@@ -364,15 +364,15 @@ void Particle_Std::update(void)
     if(ttl == 0 || newX < 0 || newX > PS_MAX_X || newY < 0 || newY > PS_MAX_Y) {
         isAlive = false;
     } else {
-        x = (uint8_t)newX;
-        y = (uint8_t)newY;
+        x = (byte)newX;
+        y = (byte)newY;
     }
 }
 
 
-uint8_t ParticleSys::perCycle = 1;
+byte ParticleSys::perCycle = 1;
 
-ParticleSys::ParticleSys(uint8_t num, Particle_Abstract particles[], Emitter_Abstract *emitter)
+ParticleSys::ParticleSys(byte num, Particle_Abstract particles[], Emitter_Abstract *emitter)
 {
     this->num = num;
     this->particles = particles;
@@ -400,9 +400,9 @@ PartMatrix::PartMatrix()
 {
 }
 
-void PartMatrix::render(Particle_Abstract particles[], uint8_t numParticles)
+void PartMatrix::render(Particle_Abstract particles[], byte numParticles)
 {
-    uint8_t row, col, dx, dy;
+    byte row, col, dx, dy;
     unsigned long tempVal;
     ColorHSV colorHSV;
     ColorRGB baseRGB;
@@ -519,7 +519,7 @@ void PartMatrix::HSVtoRGB(ColorRGB *colorRGB, ColorHSV *colorHSV)
     colorRGB->b = (int)(b * 255.0);
 }
 
-void PartMatrix::addColor(uint8_t col, uint8_t row, ColorRGB *colorRGB, unsigned long value)
+void PartMatrix::addColor(byte col, byte row, ColorRGB *colorRGB, unsigned long value)
 {
     //ColorRGB *colorRGB=(ColorRGB *)vRGB;
     unsigned long tempVal;
@@ -565,8 +565,8 @@ void PartMatrix::addColor(uint8_t col, uint8_t row, ColorRGB *colorRGB, unsigned
 void PartMatrix::reset(void)
 {
     //init all pixels to zero
-    for (uint8_t y=0; y<PS_PIXELS_Y; y++) {
-        for(uint8_t x=0; x<PS_PIXELS_X; x++) {
+    for (byte y=0; y<PS_PIXELS_Y; y++) {
+        for(byte x=0; x<PS_PIXELS_X; x++) {
             matrix[x][y].r = 0;
             matrix[x][y].g = 0;
             matrix[x][y].b = 0;
@@ -577,8 +577,8 @@ void PartMatrix::reset(void)
 void PartMatrix::fade(void)
 {
     //fade all pixels
-    for (uint8_t y=0; y<PS_PIXELS_Y; y++) {
-        for(uint8_t x=0; x<PS_PIXELS_X; x++) {
+    for (byte y=0; y<PS_PIXELS_Y; y++) {
+        for(byte x=0; x<PS_PIXELS_X; x++) {
             matrix[x][y].r = matrix[x][y].r>>1;
             matrix[x][y].g = matrix[x][y].g>>1;
             matrix[x][y].b = matrix[x][y].b>>1;
@@ -586,11 +586,11 @@ void PartMatrix::fade(void)
     }
 }
 
-void PartMatrix::fadeBy(uint8_t amount)
+void PartMatrix::fadeBy(byte amount)
 {
     //fade all pixels
-    for (uint8_t y=0; y<PS_PIXELS_Y; y++) {
-        for(uint8_t x=0; x<PS_PIXELS_X; x++) {
+    for (byte y=0; y<PS_PIXELS_Y; y++) {
+        for(byte x=0; x<PS_PIXELS_X; x++) {
             matrix[x][y].r = matrix[x][y].r < amount ? 0 : matrix[x][y].r - amount;
             matrix[x][y].g = matrix[x][y].g < amount ? 0 : matrix[x][y].g - amount;
             matrix[x][y].b = matrix[x][y].b < amount ? 0 : matrix[x][y].b - amount;

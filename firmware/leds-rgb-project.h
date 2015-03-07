@@ -39,17 +39,40 @@
 #endif
 
 typedef struct {
-    uint8_t r;
-    uint8_t g;
-    uint8_t b;
+    byte r;
+    byte g;
+    byte b;
 } ColorRGB;
 
 //a color with 3 components: h, s and v
 typedef struct {
-    uint8_t h;
-    uint8_t s;
-    uint8_t v;
+    byte h;
+    byte s;
+    byte v;
 } ColorHSV;
+
+/*class Particle_Abstract {
+public:
+    byte x;   //left
+    byte y;   //bottom
+    signed char vx;  //horizontal velocity
+    signed char vy;  //vertical velocity
+    byte ttl; //time to live
+    byte hue; //hue
+    boolean isAlive; //is alive?
+
+    virtual void update(void);
+};*/
+
+typedef struct {
+	byte x;   //left
+    byte y;   //bottom
+    signed char vx;  //horizontal velocity
+    signed char vy;  //vertical velocity
+    byte ttl; //time to live
+    byte hue; //hue
+    boolean isAlive; //is alive?
+} Particle_Abstract;
 
 class Emitter_Abstract {
 public:
@@ -59,8 +82,8 @@ public:
 
 class Emitter_Fire : public Emitter_Abstract {
 public:
-    static uint8_t baseHue;
-    static uint8_t maxTtl;
+    static byte baseHue;
+    static byte maxTtl;
     unsigned int counter;
     boolean cycleHue;
 
@@ -72,39 +95,39 @@ public:
 class Emitter_Fixed : public Emitter_Abstract {
 public:
     unsigned int counter;
-    uint8_t x;
-    uint8_t y;
+    byte x;
+    byte y;
     signed char vx;
     signed char vy;
-    uint8_t ttl;
+    byte ttl;
 
-    Emitter_Fixed(uint8_t x, uint8_t y, signed char vx, signed char vy, uint8_t ttl);
+    Emitter_Fixed(byte x, byte y, signed char vx, signed char vy, byte ttl);
     void emit(Particle_Abstract * particle);
 };
 
 
 class Emitter_Fountain : public Emitter_Abstract {
 public:
-    static uint8_t minLife;
-    static uint8_t maxLife;
+    static byte minLife;
+    static byte maxLife;
     signed char vx;  //horizontal velocity for emitted particles
     signed char vy;  //vertical velocity for emitted particles
-    uint8_t var; //emitted particles velocity variance
+    byte var; //emitted particles velocity variance
     Particle_Abstract *source; //source point
     unsigned int counter;
 
-    Emitter_Fountain(signed char vx, signed char vy, uint8_t var, Particle_Abstract *source);
+    Emitter_Fountain(signed char vx, signed char vy, byte var, Particle_Abstract *source);
     void emit(Particle_Abstract * particle);
     void update();
 private:
-    uint8_t _hVar;
+    byte _hVar;
 };
 
 
 class Emitter_Side : public Emitter_Abstract {
 public:
-    static uint8_t baseHue;
-    static uint8_t maxTtl;
+    static byte baseHue;
+    static byte maxTtl;
     unsigned int counter;
     char side;
 
@@ -114,14 +137,14 @@ public:
 
 class Emitter_Spin : public Emitter_Abstract {
 public:
-    static uint8_t maxTtl;
-    uint8_t x;   //left
-    uint8_t y;   //bottom
-    uint8_t r;   //radius
+    static byte maxTtl;
+    byte x;   //left
+    byte y;   //bottom
+    byte r;   //radius
     signed char rv;  //radial velocity
     boolean oscilate; //whether to oscilate radial velocity
     unsigned int counter;
-    Emitter_Spin(uint8_t x, uint8_t y, uint8_t r, signed char rv);
+    Emitter_Spin(byte x, byte y, byte r, signed char rv);
     void emit(Particle_Abstract * particle);
     void update();
 private:
@@ -130,23 +153,10 @@ private:
     signed char tempRv;
 };
 
-class Particle_Abstract {
-public:
-    uint8_t x;   //left
-    uint8_t y;   //bottom
-    signed char vx;  //horizontal velocity
-    signed char vy;  //vertical velocity
-    uint8_t ttl; //time to live
-    uint8_t hue; //hue
-    boolean isAlive; //is alive?
-
-    virtual void update(void);
-};
-
 class Particle_Attractor : public Particle_Abstract {
 public:
-    static uint8_t atx; //horizontal attractor position
-    static uint8_t aty; //vertical attractor position
+    static byte atx; //horizontal attractor position
+    static byte aty; //vertical attractor position
     static signed char atf; //attractor force
 
     Particle_Attractor();
@@ -164,7 +174,7 @@ public:
 
 class Particle_Fixed : public Particle_Abstract {
 public:
-    static uint8_t decayFactor;
+    static byte decayFactor;
     Particle_Fixed();
     void update(void);
 };
@@ -180,16 +190,16 @@ public:
 
 class ParticleSys {
 public:
-    static uint8_t perCycle;
-    uint8_t num;
+    static byte perCycle;
+    byte num;
     Particle_Abstract *particles;
     Emitter_Abstract *emitter;
 
-    ParticleSys(uint8_t num, Particle_Abstract particles[], Emitter_Abstract *emitter);
+    ParticleSys(byte num, Particle_Abstract particles[], Emitter_Abstract *emitter);
     void update();
 
 private:
-    uint8_t cycleRemaining;
+    byte cycleRemaining;
 };
 
 
@@ -200,12 +210,12 @@ public:
     ColorRGB matrix[PS_PIXELS_X][PS_PIXELS_Y];
 
     PartMatrix();
-    void render(Particle_Abstract particles[], uint8_t numParticles);
+    void render(Particle_Abstract particles[], byte numParticles);
     void reset(void);    //set each pixel to 0
     void fade(void);     //devide each pixel by half
-    void fadeBy(uint8_t amount); //substract amount from each pixel 
+    void fadeBy(byte amount); //substract amount from each pixel 
     static void HSVtoRGB(ColorRGB *colorRGB, ColorHSV *colorHSV);
 
 private:
-    void addColor(uint8_t col, uint8_t row, ColorRGB *rgb, unsigned long value);
+    void addColor(byte col, byte row, ColorRGB *rgb, unsigned long value);
 };
