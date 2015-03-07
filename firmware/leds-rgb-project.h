@@ -13,16 +13,16 @@
 #include "application.h"
 
  #ifndef PS_PIXELS_X
-#define PS_PIXELS_X 8
+#define PS_PIXELS_X 5
 #endif
 
 #ifndef PS_PIXELS_Y
-#define PS_PIXELS_Y 8
+#define PS_PIXELS_Y 5
 #endif
 
 //particle dimensions
 #ifndef PS_P_RADIUS
-#define PS_P_RADIUS 32
+#define PS_P_RADIUS 8
 #endif
 
 #ifndef PS_P_SURFACE
