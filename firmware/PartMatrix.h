@@ -17,7 +17,6 @@
 #include "PsConstants.h"
 #include "Particle_Abstract.h"
 
-//#include "Arduino.h"
 
 typedef struct {
     byte r;

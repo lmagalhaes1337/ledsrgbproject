@@ -16,7 +16,6 @@
 
 #include "Emitter_Abstract.h"
 #include "Particle_Abstract.h"
-//#include "Arduino.h"
 
 class Emitter_Fountain : public Emitter_Abstract {
 public:

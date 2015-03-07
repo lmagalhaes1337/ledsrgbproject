@@ -19,7 +19,6 @@
 #include "Emitter_Abstract.h"
 
 
-//#include "Arduino.h"
 
 class ParticleSys {
 public:
