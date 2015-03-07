@@ -471,7 +471,7 @@ void PartMatrix::HSVtoRGB(ColorRGB *colorRGB, ColorHSV *colorHSV)
     //if saturation > 0, more complex calculations are needed
     else {
         h *= 6.0; //to bring hue to a number between 0 and 6, better for the calculations
-        i = (int)(h)); //e.g. 2.7 becomes 2 and 3.01 becomes 3 or 4.9999 becomes 4
+        i = (int)h; //e.g. 2.7 becomes 2 and 3.01 becomes 3 or 4.9999 becomes 4
         f = h - i;//the fractional part of h
 
         p = (float)(v * (1.0 - s));
