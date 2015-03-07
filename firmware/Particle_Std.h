@@ -16,6 +16,7 @@
 
 #include "PsConstants.h"
 #include "Particle_Abstract.h"
+#include "application.h"
 
 class Particle_Std : public Particle_Abstract {
 public:

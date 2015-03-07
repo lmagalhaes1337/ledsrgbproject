@@ -11,23 +11,3 @@
  * Emitter_Fire.h - emit particles to simulate fire
  */
 
-#ifndef emitter_fire_h
-#define emitter_fire_h
-
-#include "PsConstants.h"
-#include "Emitter_Abstract.h"
-#include "application.h"
-
-class Emitter_Fire : public Emitter_Abstract {
-public:
-    static byte baseHue;
-    static byte maxTtl;
-    unsigned int counter;
-    boolean cycleHue;
-
-    Emitter_Fire();
-    void emit(Particle_Abstract *particle);
-    void update();
-};
-
-#endif /* emitter_fire_h */

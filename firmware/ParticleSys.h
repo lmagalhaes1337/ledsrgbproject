@@ -17,6 +17,7 @@
 #include "PsConstants.h"
 #include "Particle_Abstract.h"
 #include "Emitter_Abstract.h"
+#include "application.h"
 
 
 
