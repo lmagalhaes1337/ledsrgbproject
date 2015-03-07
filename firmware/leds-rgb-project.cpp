@@ -216,8 +216,8 @@ void Emitter_Spin::update()
         radAngle = 180-counter*tempRv*(3.14/180) ;
     }
     // Convert Polar -> Cartesian
-    vx = (signed char)(r * 4)//cos(radAngle));
-    vy = (signed char)(r * 3)//sin(radAngle));
+    vx = (signed char)(r * 4);//cos(radAngle));
+    vy = (signed char)(r * 3);//sin(radAngle));
 }
 
 void Emitter_Spin::emit(Particle_Abstract * particle)
