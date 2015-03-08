@@ -400,7 +400,7 @@ PartMatrix::PartMatrix()
 {
 }
 
-void PartMatrix::render(Particle_Abstract particles[], byte numParticles, ColorRGB matrix[PS_PIXELS_X][PS_PIXELS_Y])
+void PartMatrix::render(Particle_Abstract particles[], byte numParticles, ColorRGB matrix_u[PS_PIXELS_X][PS_PIXELS_Y])
 {
     byte row, col, dx, dy;
     unsigned long tempVal;
@@ -425,27 +425,27 @@ void PartMatrix::render(Particle_Abstract particles[], byte numParticles, ColorR
         col = particles[i].x / PS_P_RADIUS;
         row = particles[i].y / PS_P_RADIUS;
         tempVal = ((unsigned long)dx*dy*particles[i].ttl)>>10; //divide by PS_P_SURFACE == 1024
-        addColor(col, row, &baseRGB, tempVal, matrix);
+        addColor(col, row, &baseRGB, tempVal, matrix_u);
 
         //bottom right;
         col++;
         if (col < PS_PIXELS_X) {
             tempVal = ((unsigned long)(PS_P_RADIUS-dx)*dy*particles[i].ttl)>>10; //divide by PS_P_SURFACE == 1024
-            addColor(col, row, &baseRGB, tempVal, matrix);
+            addColor(col, row, &baseRGB, tempVal, matrix_u);
         }
 
         //top right
         row++;
         if (col < PS_PIXELS_X && row < PS_PIXELS_Y) {
             tempVal = ((unsigned long)(PS_P_RADIUS-dx)*(PS_P_RADIUS-dy)*particles[i].ttl)>>10; //divide by PS_P_SURFACE == 1024
-            addColor(col, row, &baseRGB, tempVal, matrix);
+            addColor(col, row, &baseRGB, tempVal, matrix_u);
         }
 
         //top left
         col--;
         if (row < PS_PIXELS_Y) {
             tempVal = ((unsigned long)dx*(PS_P_RADIUS-dy)*particles[i].ttl)>>10; //divide by PS_P_SURFACE == 1024
-            addColor(col, row, &baseRGB, tempVal, matrix);
+            addColor(col, row, &baseRGB, tempVal, matrix_u);
         }
     }
 }
@@ -519,7 +519,7 @@ void PartMatrix::HSVtoRGB(ColorRGB *colorRGB, ColorHSV *colorHSV)
     colorRGB->b = (int)(b * 255.0);
 }
 
-void PartMatrix::addColor(byte col, byte row, ColorRGB *colorRGB, unsigned long value, ColorRGB matrix[PS_PIXELS_X][PS_PIXELS_Y])
+void PartMatrix::addColor(byte col, byte row, ColorRGB *colorRGB, unsigned long value, ColorRGB matrix_u[PS_PIXELS_X][PS_PIXELS_Y])
 {
     //ColorRGB *colorRGB=(ColorRGB *)vRGB;
     unsigned long tempVal;
@@ -527,37 +527,37 @@ void PartMatrix::addColor(byte col, byte row, ColorRGB *colorRGB, unsigned long 
 
     //RED
     if (colorRGB->r > 0) {
-        tempVal = matrix[col][row].r + ((value*colorRGB->r)>>8);
-        matrix[col][row].r = min(tempVal, 255);
+        tempVal = matrix_u[col][row].r + ((value*colorRGB->r)>>8);
+        matrix_u[col][row].r = min(tempVal, 255);
         if (isOverflow && tempVal > 255) {
             res = tempVal-255;
             res = res>>2;
-            matrix[col][row].g = min((matrix[col][row].g+res), 255);
-            matrix[col][row].b = min((matrix[col][row].b+res), 255);
+            matrix_u[col][row].g = min((matrix_u[col][row].g+res), 255);
+            matrix_u[col][row].b = min((matrix_u[col][row].b+res), 255);
         }
     }
 
     //GREEN
     if (colorRGB->g > 0) {
-        tempVal = matrix[col][row].g + ((value*colorRGB->g)>>8);
-        matrix[col][row].g = min(tempVal, 255);
+        tempVal = matrix_u[col][row].g + ((value*colorRGB->g)>>8);
+        matrix_u[col][row].g = min(tempVal, 255);
         if (isOverflow && tempVal > 255) {
             res = tempVal-255;
             res = res>>2;
-            matrix[col][row].r = min((matrix[col][row].r+res), 255);
-            matrix[col][row].b = min((matrix[col][row].b+res), 255);
+            matrix_u[col][row].r = min((matrix_u[col][row].r+res), 255);
+            matrix_u[col][row].b = min((matrix_u[col][row].b+res), 255);
         }
     }
 
     //BLUE
     if (colorRGB->b > 0) {
-        tempVal = matrix[col][row].b + ((value*colorRGB->b)>>8);
-        matrix[col][row].b = min(tempVal, 255);
+        tempVal = matrix_u[col][row].b + ((value*colorRGB->b)>>8);
+        matrix_u[col][row].b = min(tempVal, 255);
         if (isOverflow && tempVal > 255) {
             res = tempVal-255;
             res = res>>2;
-            matrix[col][row].r = min((matrix[col][row].r+res), 255);
-            matrix[col][row].g = min((matrix[col][row].g+res), 255);
+            matrix_u[col][row].r = min((matrix_u[col][row].r+res), 255);
+            matrix_u[col][row].g = min((matrix_u[col][row].g+res), 255);
         }
     }
 }
