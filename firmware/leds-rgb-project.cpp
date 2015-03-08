@@ -409,9 +409,9 @@ void PartMatrix::render(Particle_Abstract particles[], byte numParticles)
 
     //go over particles and update matrix cells on the way
     for(int i = 0; i<numParticles; i++) {
-        if (! particles[i].isAlive) {
+        /*if (! particles[i].isAlive) {
             continue;
-        }
+        }*/
         //generate RGB values for particle
         colorHSV.h = particles[i].hue;
         colorHSV.s = 255;
