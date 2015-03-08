@@ -210,12 +210,12 @@ public:
     ColorRGB matrix[PS_PIXELS_X][PS_PIXELS_Y];
 
     PartMatrix();
-    void render(Particle_Abstract particles[], byte numParticles, ColorRGB matrix_u[PS_PIXELS_X][PS_PIXELS_Y]);
+    void render(Particle_Abstract particles[], byte numParticles);
     void reset(void);    //set each pixel to 0
     void fade(void);     //devide each pixel by half
     void fadeBy(byte amount); //substract amount from each pixel 
     static void HSVtoRGB(ColorRGB *colorRGB, ColorHSV *colorHSV);
-	void addColor(byte col, byte row, ColorRGB *rgb, unsigned long value, ColorRGB matrix_u[PS_PIXELS_X][PS_PIXELS_Y]);
 
 private:
+    void addColor(byte col, byte row, ColorRGB *rgb, unsigned long value);
 };
