@@ -215,7 +215,7 @@ public:
     void fade(void);     //devide each pixel by half
     void fadeBy(byte amount); //substract amount from each pixel 
     static void HSVtoRGB(ColorRGB *colorRGB, ColorHSV *colorHSV);
+    void addColor(byte col, byte row, ColorRGB *rgb, unsigned long value);
 
 private:
-    void addColor(byte col, byte row, ColorRGB *rgb, unsigned long value);
 };
