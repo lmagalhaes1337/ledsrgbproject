@@ -400,7 +400,7 @@ PartMatrix::PartMatrix()
 {
 }
 
-void PartMatrix::render(Particle_Abstract particles[], byte numParticles)
+void PartMatrix::render(Particle_Abstract particles[], byte numParticles, ColorRGB matrix[PS_PIXELS_X][PS_PIXELS_Y])
 {
     byte row, col, dx, dy;
     unsigned long tempVal;
@@ -425,27 +425,27 @@ void PartMatrix::render(Particle_Abstract particles[], byte numParticles)
         col = particles[i].x / PS_P_RADIUS;
         row = particles[i].y / PS_P_RADIUS;
         tempVal = ((unsigned long)dx*dy*particles[i].ttl)>>10; //divide by PS_P_SURFACE == 1024
-        addColor(col, row, &baseRGB, tempVal);
+        addColor(col, row, &baseRGB, tempVal, matrix);
 
         //bottom right;
         col++;
         if (col < PS_PIXELS_X) {
             tempVal = ((unsigned long)(PS_P_RADIUS-dx)*dy*particles[i].ttl)>>10; //divide by PS_P_SURFACE == 1024
-            addColor(col, row, &baseRGB, tempVal);
+            addColor(col, row, &baseRGB, tempVal, matrix);
         }
 
         //top right
         row++;
         if (col < PS_PIXELS_X && row < PS_PIXELS_Y) {
             tempVal = ((unsigned long)(PS_P_RADIUS-dx)*(PS_P_RADIUS-dy)*particles[i].ttl)>>10; //divide by PS_P_SURFACE == 1024
-            addColor(col, row, &baseRGB, tempVal);
+            addColor(col, row, &baseRGB, tempVal, matrix);
         }
 
         //top left
         col--;
         if (row < PS_PIXELS_Y) {
             tempVal = ((unsigned long)dx*(PS_P_RADIUS-dy)*particles[i].ttl)>>10; //divide by PS_P_SURFACE == 1024
-            addColor(col, row, &baseRGB, tempVal);
+            addColor(col, row, &baseRGB, tempVal, matrix);
         }
     }
 }
@@ -519,7 +519,7 @@ void PartMatrix::HSVtoRGB(ColorRGB *colorRGB, ColorHSV *colorHSV)
     colorRGB->b = (int)(b * 255.0);
 }
 
-void PartMatrix::addColor(byte col, byte row, ColorRGB *colorRGB, unsigned long value)
+void PartMatrix::addColor(byte col, byte row, ColorRGB *colorRGB, unsigned long value, ColorRGB matrix[PS_PIXELS_X][PS_PIXELS_Y])
 {
     //ColorRGB *colorRGB=(ColorRGB *)vRGB;
     unsigned long tempVal;

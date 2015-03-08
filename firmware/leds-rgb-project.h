@@ -22,7 +22,7 @@
 
 //particle dimensions
 #ifndef PS_P_RADIUS
-#define PS_P_RADIUS 8
+#define PS_P_RADIUS 32
 #endif
 
 #ifndef PS_P_SURFACE
@@ -207,15 +207,15 @@ private:
 class PartMatrix {
 public:
     static boolean isOverflow;
-    ColorRGB matrix[PS_PIXELS_X][PS_PIXELS_Y];
+    //ColorRGB matrix[PS_PIXELS_X][PS_PIXELS_Y];
 
     PartMatrix();
-    void render(Particle_Abstract particles[], byte numParticles);
+    void render(Particle_Abstract particles[], byte numParticles,ColorRGB matrix[PS_PIXELS_X][PS_PIXELS_Y]);
     void reset(void);    //set each pixel to 0
     void fade(void);     //devide each pixel by half
     void fadeBy(byte amount); //substract amount from each pixel 
     static void HSVtoRGB(ColorRGB *colorRGB, ColorHSV *colorHSV);
+	void addColor(byte col, byte row, ColorRGB *rgb, unsigned long value, ColorRGB matrix[PS_PIXELS_X][PS_PIXELS_Y]);
 
 private:
-    void addColor(byte col, byte row, ColorRGB *rgb, unsigned long value);
 };
