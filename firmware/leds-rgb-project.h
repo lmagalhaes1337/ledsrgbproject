@@ -210,7 +210,7 @@ public:
     //ColorRGB matrix[PS_PIXELS_X][PS_PIXELS_Y];
 
     PartMatrix();
-    void render(Particle_Abstract particles[], byte numParticles,ColorRGB matrix[PS_PIXELS_X][PS_PIXELS_Y]);
+    void render(Particle_Abstract particles[], byte numParticles, ColorRGB matrix[PS_PIXELS_X][PS_PIXELS_Y]);
     void reset(void);    //set each pixel to 0
     void fade(void);     //devide each pixel by half
     void fadeBy(byte amount); //substract amount from each pixel 
